@@ -7,6 +7,8 @@ cont=0
 seg=0
 minu=0
 hor=0
+ganar=True
+contniv=1
 stop=False
 f=None
 cargar=False
@@ -311,26 +313,26 @@ def nombre():
            e4.bind("<Enter>",cambia_color)
 
            e5.grid(row=1,column=5)
-           e6.grid(row=1,column=6)
-           e7.grid(row=2,column=1)
-           e8.grid(row=2,column=2)
-           e9.grid(row=2,column=3)
-           e10.grid(row=2,column=4)
-           e11.grid(row=2,column=5)
-           e12.grid(row=2,column=6)
-           e13.grid(row=3,column=1)
-           e14.grid(row=3,column=2)
-           e15.grid(row=3,column=3)
-           e16.grid(row=3,column=4)
-           e17.grid(row=3,column=5)
-           e18.grid(row=3,column=6)
-           e19.grid(row=4,column=1)
-           e20.grid(row=4,column=2)
-           e21.grid(row=4,column=3)
-           e22.grid(row=4,column=4)
-           e23.grid(row=4,column=5)
-           e24.grid(row=4,column=6)
-           e25.grid(row=5,column=1)
+           e6.grid(row=2,column=1)
+           e7.grid(row=2,column=2)
+           e8.grid(row=2,column=3)
+           e9.grid(row=2,column=4)
+           e10.grid(row=2,column=5)
+           e11.grid(row=3,column=1)
+           e12.grid(row=3,column=2)
+           e13.grid(row=3,column=3)
+           e14.grid(row=3,column=4)
+           e15.grid(row=3,column=5)
+           e16.grid(row=4,column=1)
+           e17.grid(row=4,column=2)
+           e18.grid(row=4,column=3)
+           e19.grid(row=4,column=4)
+           e20.grid(row=4,column=5)
+           e21.grid(row=5,column=1)
+           e22.grid(row=5,column=2)
+           e23.grid(row=5,column=3)
+           e24.grid(row=5,column=4)
+           e25.grid(row=5,column=5)
            e5.bind("<Enter>",cambia_color)
            e6.bind("<Enter>",cambia_color)
            e7.bind("<Enter>",cambia_color)
@@ -1462,6 +1464,14 @@ def nombre():
            pl.destroy()
            play()
         def Nuevo_juego():
+            global tres
+            global cuatro
+            global cinco
+            global seis
+            global siete
+            global ocho
+            global nueve
+            global multi
             global listaf3
             global listaf4
             global listaf5
@@ -1483,6 +1493,7 @@ def nombre():
             global listad7
             global listad8
             global listad9
+            global contniv
             if facil:
                 if tres==True:
                    listaf3.remove(p)
@@ -1499,7 +1510,6 @@ def nombre():
                 elif nueve==True:
                    listaf9.remove(p)
                 pl.destroy()
-                play()
             elif normal:
                 if tres==True:
                    listai3.remove(p)
@@ -1516,7 +1526,6 @@ def nombre():
                 elif nueve==True:
                    listai9.remove(p)
                 pl.destroy()
-                play()
             else:
                 if tres==True:
                    listad3.remove(p)
@@ -1533,8 +1542,34 @@ def nombre():
                 elif nueve==True:
                    listad9.remove(p)
                 pl.destroy()
-                play()
+            if multi==True:
+               if contniv==1:
+                  tres=False
+                  cuatro=True
+                  contniv+=1
+               elif contniv==2:
+                  cuatro=False
+                  cinco=True
+                  contniv+=1
+               elif contniv==3:
+                  cinco=False
+                  seis=True
+                  contniv+=1
+               elif contniv==4:
+                  seis=False
+                  siete=True
+                  contniv+=1
+               elif contniv==5:
+                  siete=False
+                  ocho=True
+                  contniv+=1
+               elif contniv==6:
+                  ocho=False
+                  nueve=True
+            play()
+               
         def comprobar():
+            global ganar
             comprolinea=[]
             comprocol=[]
             result=0
@@ -1572,6 +1607,7 @@ def nombre():
                     if int(varia)!=comprolinea[0]:
                         messagebox.showerror("Error", "Solucion incorrecta en las casillas")
                         comprolinea=[]
+                        ganar=False
                 if vaarios=="X":
                     for l in comprolinea:
                         resultmilt*=l
@@ -1579,6 +1615,7 @@ def nombre():
                     
                     if resultmilt!=int(varia):
                         messagebox.showerror("Error", "Solucion incorrecta en las casillas")
+                        ganar=False
                     comprolinea=[]
                     resultmilt=1
                         
@@ -1591,6 +1628,7 @@ def nombre():
                         result+=l
                     if result!=int(varia):
                         messagebox.showerror("Error", "Solucion incorrecta en las casillas")
+                        ganar=False
 
                     comprolinea=[]
                     result=0
@@ -1603,6 +1641,7 @@ def nombre():
                     print(result)
                     if result!=int(varia):
                         messagebox.showerror("Error", "Solucion incorrecta en las casillas")
+                        ganar=False
                     comprolinea=[]
                     result=0
                 elif vaarios=="/":
@@ -1613,12 +1652,14 @@ def nombre():
                     
                     if vardiv!=int(varia):
                         messagebox.showerror("Error", "Solucion incorrecta en las casillas")
+                        ganar=False
                         
                     
                     comprolinea=[]    
                 else:
                     if int(varia)!=comprolinea[0]:
                         messagebox.showerror("Error", "Solucion incorrecta en las casillas")
+                        ganar=False
                         comprolinea=[]
                         
                     
@@ -1634,6 +1675,7 @@ def nombre():
                     bar=int(j.get())
                     if bar in l1:
                         messagebox.showerror("Error", "Solucion incorrecta en las filas")
+                        ganar=False
                         break
                     else:
                         l1+=[bar]
@@ -1647,21 +1689,25 @@ def nombre():
                     print(bar,l1)
                     if bar in l1:
                         messagebox.showerror("Error", "Solucion incorrecta en las columnas")
+                        ganar=False
                         break
                     else:
                         l1+=[bar]
                 l1=[]
-
-            messagebox.showinfo("Enhorabuena", "Solucion lograda")
-            nombres=e82.get()
-            r=open("Top 10.txt","r")
+            if ganar:
+               messagebox.showinfo("Enhorabuena", "Solucion lograda")
+               #nombres=e82.get()
+               #r=open("Top 10.txt","r")
             
-            nuv=r.read()
-            r.close()
+               #nuv=r.read()
+               #r.close()
             
-            r=open("Top 10.txt","w")
-            r.write(nuv+" "+nombres)
-            r.close()
+               #r=open("Top 10.txt","w")
+               #r.write(nuv+" "+nombres)
+               #r.close()
+               if multi:
+                  Nuevo_juego()
+            ganar=True
         
         if cargar:
            try:
@@ -2683,7 +2729,7 @@ def config():
          nueve=True
          multi=False
       elif v.get()==8:
-         tres=False
+         tres=True
          cuatro=False
          cinco=False
          seis=False
